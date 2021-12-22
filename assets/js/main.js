@@ -6,6 +6,24 @@
 
 (function($) {
 
+	//lang
+
+	let toggleLang = function (){
+		$('[lang="pl"]').toggle();
+		$('[lang="en"]').toggle();
+	}
+
+	let hideLang = function (){
+		$('[lang="pl"]').hide();
+		$('[lang="en"]').hide();
+	}
+
+	hideLang();
+	var language = localStorage.getItem("lang") ?? "en";
+	$('[lang='+language+']').show();
+
+
+
 	var	$window = $(window),
 		$body = $('body'),
 		$header = $('#header'),
@@ -132,6 +150,13 @@
 
 				// Toggle.
 					$menu._toggle();
+
+			})
+			.on('click', 'a[href="#lang"]', function(event) {
+
+				language = language === "en" ? "pl" : "en";
+				localStorage.setItem("lang", language);
+				toggleLang();
 
 			})
 			.on('keydown', function(event) {
